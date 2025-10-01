@@ -2,7 +2,7 @@ name: Cypress Regression Test
 
 on:
   schedule:
-    - cron: "0 * * * *" # Setiap 1 jam
+    - cron: "*/5 * * * *" # Setiap 5 menit
   workflow_dispatch:
 
 jobs:
