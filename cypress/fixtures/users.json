@@ -1,0 +1,17 @@
+{
+  "admin1": {
+    "role": "Admin",
+    "email": "admin1@fata-organa.com",
+    "password": "ppcQ5FIt"
+  },
+  "admin2": {
+    "role": "Admin",
+    "email": "admin2@fata-organa.com",
+    "password": "KuMw5hZq"
+  },
+  "client": {
+    "role": "Client",
+    "email": "halim@fata-organa.com",
+    "password": "KuMw5hZq"
+  }
+}

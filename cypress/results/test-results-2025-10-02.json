@@ -2,36 +2,127 @@
   "project": 1,
   "date": "2025-10-02",
   "summary": {
-    "totalTests": 2,
-    "passed": 2,
-    "failed": 0,
+    "totalTests": 9,
+    "passed": 8,
+    "failed": 1,
     "skipped": 0,
-    "executionTime": "2255ms"
+    "executionTime": "34886ms"
   },
   "detailedResults": [
     {
       "testCaseId": "TC-001",
-      "testCaseName": "Form login displayed",
+      "testCaseName": "should login successfully as admin1",
       "status": "Passed",
-      "executionTime": "1462ms",
+      "executionTime": "6018ms",
       "steps": [
         {
           "step": 1,
-          "description": "Form login displayed",
+          "description": "should login successfully as admin1",
           "status": "Passed"
         }
       ]
     },
     {
       "testCaseId": "TC-002",
-      "testCaseName": "User can access sign up page",
+      "testCaseName": "should login successfully as admin2",
       "status": "Passed",
-      "executionTime": "793ms",
+      "executionTime": "2483ms",
       "steps": [
         {
           "step": 1,
-          "description": "User can access sign up page",
+          "description": "should login successfully as admin2",
           "status": "Passed"
+        }
+      ]
+    },
+    {
+      "testCaseId": "TC-003",
+      "testCaseName": "should login successfully as client",
+      "status": "Passed",
+      "executionTime": "5144ms",
+      "steps": [
+        {
+          "step": 1,
+          "description": "should login successfully as client",
+          "status": "Passed"
+        }
+      ]
+    },
+    {
+      "testCaseId": "TC-004",
+      "testCaseName": "should show error with invalid credentials",
+      "status": "Passed",
+      "executionTime": "2571ms",
+      "steps": [
+        {
+          "step": 1,
+          "description": "should show error with invalid credentials",
+          "status": "Passed"
+        }
+      ]
+    },
+    {
+      "testCaseId": "TC-005",
+      "testCaseName": "should require email",
+      "status": "Passed",
+      "executionTime": "583ms",
+      "steps": [
+        {
+          "step": 1,
+          "description": "should require email",
+          "status": "Passed"
+        }
+      ]
+    },
+    {
+      "testCaseId": "TC-006",
+      "testCaseName": "should require password",
+      "status": "Passed",
+      "executionTime": "984ms",
+      "steps": [
+        {
+          "step": 1,
+          "description": "should require password",
+          "status": "Passed"
+        }
+      ]
+    },
+    {
+      "testCaseId": "TC-007",
+      "testCaseName": "should allow logout after successful login",
+      "status": "Passed",
+      "executionTime": "2774ms",
+      "steps": [
+        {
+          "step": 1,
+          "description": "should allow logout after successful login",
+          "status": "Passed"
+        }
+      ]
+    },
+    {
+      "testCaseId": "TC-008",
+      "testCaseName": "should maintain login state after page refresh",
+      "status": "Passed",
+      "executionTime": "3933ms",
+      "steps": [
+        {
+          "step": 1,
+          "description": "should maintain login state after page refresh",
+          "status": "Passed"
+        }
+      ]
+    },
+    {
+      "testCaseId": "TC-009",
+      "testCaseName": "should complete registration successfully",
+      "status": "Failed",
+      "executionTime": "10396ms",
+      "steps": [
+        {
+          "step": 1,
+          "description": "should complete registration successfully",
+          "status": "Failed"
         }
       ]
     }
