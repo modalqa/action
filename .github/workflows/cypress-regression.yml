@@ -8,9 +8,6 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    env:
-      API_KEY: ${{ secrets.API_KEY }}
-      API_URL: 'https://crabal.fata-organa.com/api/automation/store'
 
     steps:
       - name: Checkout code
@@ -34,10 +31,6 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          config: baseUrl=https://crabal.fata-organa.com
-        env:
-          CYPRESS_API_KEY: ${{ secrets.API_KEY }}
-          CYPRESS_API_URL: 'https://crabal.fata-organa.com/api/automation/store'
 
       - name: Upload test results
         if: always()
