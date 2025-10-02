@@ -12,6 +12,18 @@ const CustomReporter = {
     detailedResults: []
   },
 
+  resetResults() {
+    this.results.summary = {
+      totalTests: 0,
+      passed: 0,
+      failed: 0,
+      skipped: 0,
+      executionTime: "0ms"
+    };
+    this.results.detailedResults = [];
+    this.results.date = new Date().toISOString().split('T')[0];
+  },
+
   onTestComplete(test) {
     const testCase = {
       testCaseId: `TC-${this.results.detailedResults.length + 1}`,
@@ -21,7 +33,7 @@ const CustomReporter = {
       steps: test.commands?.map((cmd, idx) => ({
         step: idx + 1,
         description: cmd.name,
-        status: cmd.state
+        status: cmd.state === 'passed' ? 'Passed' : 'Failed'
       })) || []
     };
 
@@ -34,7 +46,11 @@ const CustomReporter = {
     if (test.state === 'passed') this.results.summary.passed++;
     else if (test.state === 'failed') this.results.summary.failed++;
     else this.results.summary.skipped++;
-    this.results.summary.executionTime = `${test.wallClockDuration}ms`;
+    this.results.summary.executionTime = `${test.wallClockDuration || 0}ms`;
+  },
+
+  getResults() {
+    return this.results;
   }
 };
 

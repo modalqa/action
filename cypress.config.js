@@ -7,6 +7,8 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       codeCoverageTask(on, config);
       
+      CustomReporter.resetResults();
+      
       on('test:after:run', (test) => {
         CustomReporter.onTestComplete(test);
       });
@@ -20,7 +22,7 @@ module.exports = defineConfig({
               'Content-Type': 'application/json',
               'X-API-KEY': process.env.API_KEY || 'STATIC-ADMIN-TOKEN-1234567890'
             },
-            body: JSON.stringify(CustomReporter.results)
+            body: JSON.stringify(CustomReporter.getResults())
           });
 
           if (!response.ok) {
@@ -28,6 +30,17 @@ module.exports = defineConfig({
           }
           
           console.log('Test results successfully sent to API');
+          
+          // Save results locally
+          const fs = require('fs');
+          const resultsDir = './cypress/results';
+          if (!fs.existsSync(resultsDir)) {
+            fs.mkdirSync(resultsDir, { recursive: true });
+          }
+          fs.writeFileSync(
+            `${resultsDir}/test-results-${new Date().toISOString().split('T')[0]}.json`,
+            JSON.stringify(CustomReporter.getResults(), null, 2)
+          );
         } catch (error) {
           console.error('Failed to send test results:', error);
         }
