@@ -6,14 +6,14 @@
     "passed": 2,
     "failed": 0,
     "skipped": 0,
-    "executionTime": "2400ms"
+    "executionTime": "2255ms"
   },
   "detailedResults": [
     {
       "testCaseId": "TC-001",
       "testCaseName": "Form login displayed",
       "status": "Passed",
-      "executionTime": "1580ms",
+      "executionTime": "1462ms",
       "steps": [
         {
           "step": 1,
@@ -26,7 +26,7 @@
       "testCaseId": "TC-002",
       "testCaseName": "User can access sign up page",
       "status": "Passed",
-      "executionTime": "820ms",
+      "executionTime": "793ms",
       "steps": [
         {
           "step": 1,

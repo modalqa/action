@@ -1,8 +1,52 @@
-name: Cypress Regression Test
+# name: Cypress Regression Test
+
+# on:
+#   schedule:
+#     - cron: "0 */3 * * *" # Setiap 3 jam
+#   workflow_dispatch:
+
+# jobs:
+#   cypress-run:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "20"
+#           cache: 'npm'
+
+#       - name: Install dependencies
+#         run: |
+#           npm ci
+#           npm install node-fetch@3
+
+#       - name: Create results directory
+#         run: mkdir -p cypress/results
+
+#       - name: Run Cypress tests
+#         uses: cypress-io/github-action@v6
+#         with:
+#           browser: chrome
+
+#       - name: Upload test results
+#         if: always()
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: test-results
+#           path: |
+#             cypress/results
+#             cypress/videos
+#             cypress/screenshots
+#           retention-days: 30
+name: Fata Regression Test
 
 on:
   schedule:
-    - cron: "0 */3 * * *" # Setiap 3 jam
+  - cron: "0 */3 * * *" # Setiap 3 jam
   workflow_dispatch:
 
 jobs:
@@ -17,28 +61,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          npm ci
-          npm install node-fetch@3
-
-      - name: Create results directory
-        run: mkdir -p cypress/results
+        run: npm ci
 
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          browser: chrome
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: |
-            cypress/results
-            cypress/videos
-            cypress/screenshots
-          retention-days: 30
+        run: npm run test
