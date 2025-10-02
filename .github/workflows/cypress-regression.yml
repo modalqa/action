@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       API_KEY: ${{ secrets.API_KEY }}
-      API_URL: 'http://127.0.0.1:8000/api/automation/store'
+      API_URL: 'https://crabal.fata-organa.com/api/automation/store'
 
     steps:
       - name: Checkout code
@@ -23,15 +23,29 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm install node-fetch@3
+
+      - name: Create results directory
+        run: mkdir -p cypress/results
 
       - name: Run Cypress tests
-        run: npm run test
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          config: baseUrl=https://crabal.fata-organa.com
+        env:
+          CYPRESS_API_KEY: ${{ secrets.API_KEY }}
+          CYPRESS_API_URL: 'https://crabal.fata-organa.com/api/automation/store'
 
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: cypress/results
+          path: |
+            cypress/results
+            cypress/videos
+            cypress/screenshots
           retention-days: 30
