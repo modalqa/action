@@ -25,36 +25,17 @@ const CustomReporter = {
   },
 
   onTestComplete(test) {
-    // Format testCaseId dengan padding 3 digit
-    const testId = (this.results.detailedResults.length + 1).toString().padStart(3, '0');
-    
     const testCase = {
-      testCaseId: `TC-${testId}`,
-      testCaseName: test.title[test.title.length - 1], // Ambil nama test terakhir saja
+      testCaseId: `TC-${this.results.detailedResults.length + 1}`,
+      testCaseName: test.title.join(' - '),
       status: test.state === 'passed' ? 'Passed' : 'Failed',
       executionTime: `${test.duration}ms`,
-      steps: []
+      steps: test.commands?.map((cmd, idx) => ({
+        step: idx + 1,
+        description: cmd.name,
+        status: cmd.state === 'passed' ? 'Passed' : 'Failed'
+      })) || []
     };
-
-    // Mengumpulkan steps dari commands yang dijalankan
-    if (test.commands) {
-      test.commands.forEach((cmd, idx) => {
-        testCase.steps.push({
-          step: idx + 1,
-          description: cmd.name,
-          status: cmd.state === 'passed' ? 'Passed' : 'Failed'
-        });
-      });
-    }
-
-    // Jika tidak ada steps, tambahkan default step
-    if (testCase.steps.length === 0) {
-      testCase.steps.push({
-        step: 1,
-        description: test.title[test.title.length - 1],
-        status: test.state === 'passed' ? 'Passed' : 'Failed'
-      });
-    }
 
     this.results.detailedResults.push(testCase);
     this.updateSummary(test);
@@ -65,12 +46,7 @@ const CustomReporter = {
     if (test.state === 'passed') this.results.summary.passed++;
     else if (test.state === 'failed') this.results.summary.failed++;
     else this.results.summary.skipped++;
-
-    // Update total execution time
-    const totalTime = this.results.detailedResults.reduce((acc, curr) => {
-      return acc + parseInt(curr.executionTime);
-    }, 0);
-    this.results.summary.executionTime = `${totalTime}ms`;
+    this.results.summary.executionTime = `${test.wallClockDuration || 0}ms`;
   },
 
   getResults() {

@@ -9,8 +9,12 @@ module.exports = defineConfig({
       
       CustomReporter.resetResults();
       
-      on('test:after:run', (test) => {
-        CustomReporter.onTestComplete(test);
+      on('after:spec', async (spec, results) => {
+        if (results && results.tests) {
+          results.tests.forEach(test => {
+            CustomReporter.onTestComplete(test);
+          });
+        }
       });
 
       on('after:run', async () => {
@@ -24,6 +28,9 @@ module.exports = defineConfig({
             },
             body: JSON.stringify(CustomReporter.getResults())
           });
+
+          // Log data yang dikirim
+          console.log('Sending test results:', JSON.stringify(CustomReporter.getResults(), null, 2));
 
           if (!response.ok) {
             throw new Error(`API response: ${response.status}`);

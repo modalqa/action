@@ -1,0 +1,39 @@
+{
+  "project": 1,
+  "date": "2025-10-02",
+  "summary": {
+    "totalTests": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "executionTime": "8477ms"
+  },
+  "detailedResults": [
+    {
+      "testCaseId": "TC-001",
+      "testCaseName": "Form login displayed",
+      "status": "Passed",
+      "executionTime": "5925ms",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Form login displayed",
+          "status": "Passed"
+        }
+      ]
+    },
+    {
+      "testCaseId": "TC-002",
+      "testCaseName": "User can access sign up page",
+      "status": "Passed",
+      "executionTime": "2552ms",
+      "steps": [
+        {
+          "step": 1,
+          "description": "User can access sign up page",
+          "status": "Passed"
+        }
+      ]
+    }
+  ]
+}
