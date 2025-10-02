@@ -2,12 +2,15 @@ name: Cypress Regression Test
 
 on:
   schedule:
-  - cron: "0 */3 * * *" # Setiap 3 jam
+    - cron: "0 */3 * * *" # Setiap 3 jam
   workflow_dispatch:
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+      API_URL: 'http://127.0.0.1:8000/api/automation/store'
 
     steps:
       - name: Checkout code
@@ -17,9 +20,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Run Cypress tests
         run: npm run test
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: cypress/results
+          retention-days: 30
